@@ -186,7 +186,9 @@ public class Board {
 	// the application
 	public void tmpSave() {
 		try {
-
+			String nomeCartella = "cache_undo";
+			File cartella = new File(nomeCartella);
+			cartella.mkdir();
 			File file = new File("cache_undo/tmpSave.txt");
 			boolean append = file.exists(); // Controlla se il file esiste
 
