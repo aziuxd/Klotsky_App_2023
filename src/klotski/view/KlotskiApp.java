@@ -25,6 +25,11 @@ import javax.swing.JMenuItem;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.io.*;
+import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 
 import klotski.model.Board;
 import klotski.controller.AboutController;
@@ -38,6 +43,8 @@ import klotski.controller.SelectPieceController;
 import klotski.controller.SetConfigController;
 import klotski.controller.TimerController;
 import klotski.controller.UndoMoveController;
+
+import klotski.model.Piece;
 
 public class KlotskiApp extends JFrame {
 	Board board;
@@ -71,6 +78,7 @@ public class KlotskiApp extends JFrame {
 	 */
 	public KlotskiApp(Board b) {
 		this.board = b;
+		tmpSave();
 		setTitle("Klotski");
 		setFocusable(true);
 		requestFocus();
@@ -80,7 +88,6 @@ public class KlotskiApp extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
 		JFileChooser fc = new JFileChooser();
 
 		JMenuBar menuBar = new JMenuBar();
@@ -136,6 +143,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
 					KlotskiApp.this.dispose();
+					DeleteFilesInFolder();
 				}
 			}
 		});
@@ -172,6 +180,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(1);
 				timerController.resetTimer();
+				tmpSave();
 			}
 		});
 
@@ -185,6 +194,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(2);
 				timerController.resetTimer();
+				tmpSave();
 			}
 		});
 
@@ -198,6 +208,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(3);
 				timerController.resetTimer();
+				tmpSave();
 			}
 		});
 
@@ -211,6 +222,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(4);
 				timerController.resetTimer();
+				tmpSave();
 			}
 		});
 
@@ -256,6 +268,7 @@ public class KlotskiApp extends JFrame {
 			public void windowClosing(WindowEvent we) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
 					KlotskiApp.this.dispose();
+					DeleteFilesInFolder();
 				}
 			}
 		});
@@ -288,18 +301,22 @@ public class KlotskiApp extends JFrame {
 						if (dx > 0) {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(1);
+							tmpSave();
 						} else {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(3);
+							tmpSave();
 						}
 					} else {
 						// vertical drag
 						if (dy > 0) {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(2);
+							tmpSave();
 						} else {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(0);
+							tmpSave();
 						}
 					}
 				}
@@ -323,18 +340,22 @@ public class KlotskiApp extends JFrame {
 						kc == KeyEvent.VK_K) {
 					// up
 					new MovePieceController(KlotskiApp.this, board).move(0);
+					tmpSave();
 				} else if (kc == KeyEvent.VK_RIGHT || kc == KeyEvent.VK_D ||
 						kc == KeyEvent.VK_L) {
 					// right
 					new MovePieceController(KlotskiApp.this, board).move(1);
+					tmpSave();
 				} else if (kc == KeyEvent.VK_DOWN || kc == KeyEvent.VK_S ||
 						kc == KeyEvent.VK_J) {
 					// down
 					new MovePieceController(KlotskiApp.this, board).move(2);
+					tmpSave();
 				} else if (kc == KeyEvent.VK_LEFT || kc == KeyEvent.VK_A ||
 						kc == KeyEvent.VK_H) {
 					// left
 					new MovePieceController(KlotskiApp.this, board).move(3);
+					tmpSave();
 				}
 			}
 
@@ -360,6 +381,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
 				timerController.resetTimer();
+				DeleteFilesInFolder();
 			}
 		});
 
@@ -372,6 +394,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
+					DeleteFilesInFolder();
 					KlotskiApp.this.dispose();
 				}
 			}
@@ -386,6 +409,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(0);
+				tmpSave();
 			}
 		});
 		btnUp.setFocusable(false);
@@ -397,6 +421,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(1);
+				tmpSave();
 			}
 		});
 		btnRight.setFocusable(false);
@@ -408,6 +433,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(3);
+				tmpSave();
 			}
 		});
 		btnLeft.setFocusable(false);
@@ -419,6 +445,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(2);
+				tmpSave();
 			}
 		});
 		btnDown.setFocusable(false);
@@ -476,8 +503,37 @@ public class KlotskiApp extends JFrame {
 		});
 		updateThread.start();
 
-		DeleteFilesInFolder();
+	}
 
+	public void tmpSave() {
+		try {
+			Piece[] pieces = board.getPieces();
+			File file = new File("cache_undo/tmpSave.txt");
+			boolean append = file.exists(); // Controlla se il file esiste
+
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+			// print the current configuration on the tmp file
+
+			writer.write(Integer.toString(board.getMoves()));
+			writer.newLine();
+
+			for (int i = 0; i < 10; i++) {
+				int[] pezzi = pieces[i].getDims();
+				writer.write(Integer.toString(pezzi[0]) + " ");
+
+				writer.write(Integer.toString(pezzi[1]) + " ");
+
+				writer.write(Integer.toString(pezzi[2]) + " ");
+
+				writer.write(Integer.toString(pezzi[3]) + " ");
+				writer.newLine();
+			}
+
+			writer.close();
+			file.deleteOnExit();
+		} catch (IOException e) {
+			System.out.println("Error writing to file");
+		}
 	}
 
 	public void DeleteFilesInFolder() {
@@ -491,7 +547,7 @@ public class KlotskiApp extends JFrame {
 					.forEach(file -> {
 						try {
 							Files.delete(file);
-							System.out.println("Deleted file: " + file);
+
 						} catch (Exception e) {
 							System.out.println("Error deleting file: " + file);
 						}

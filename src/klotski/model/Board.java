@@ -184,37 +184,37 @@ public class Board {
 	// can be loaded if the player wants to undo the move
 	// and olds a register of very move made that get erased once the player close
 	// the application
-	public void tmpSave() {
-		try {
-			String nomeCartella = "cache_undo";
-			File cartella = new File(nomeCartella);
-			cartella.mkdir();
-			File file = new File("cache_undo/tmpSave.txt");
-			boolean append = file.exists(); // Controlla se il file esiste
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
-			// print the current configuration on the tmp file
-
-			writer.write(Integer.toString(this.moves));
-			writer.newLine();
-			for (Piece p : pieces) {
-
-				writer.write(Integer.toString(p.x) + " ");
-
-				writer.write(Integer.toString(p.y) + " ");
-
-				writer.write(Integer.toString(p.w) + " ");
-
-				writer.write(Integer.toString(p.h) + " ");
-				writer.newLine();
-			}
-
-			writer.close();
-			file.deleteOnExit();
-		} catch (IOException e) {
-			System.out.println("Error writing to file");
-		}
-	}
+	/*
+	 * public void tmpSave() {
+	 * try {
+	 * 
+	 * File file = new File("cache_undo/tmpSave.txt");
+	 * boolean append = file.exists(); // Controlla se il file esiste
+	 * 
+	 * BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+	 * // print the current configuration on the tmp file
+	 * 
+	 * writer.write(Integer.toString(this.moves));
+	 * writer.newLine();
+	 * for (Piece p : pieces) {
+	 * 
+	 * writer.write(Integer.toString(p.x) + " ");
+	 * 
+	 * writer.write(Integer.toString(p.y) + " ");
+	 * 
+	 * writer.write(Integer.toString(p.w) + " ");
+	 * 
+	 * writer.write(Integer.toString(p.h) + " ");
+	 * writer.newLine();
+	 * }
+	 * 
+	 * writer.close();
+	 * file.deleteOnExit();
+	 * } catch (IOException e) {
+	 * System.out.println("Error writing to file");
+	 * }
+	 * }
+	 */
 
 	/**
 	 * Tries to move the selected piece in the given direction
@@ -287,18 +287,20 @@ public class Board {
 
 		// if we've gotten here it means we're clear to move the selected piece
 
-		if (moves <= 0) {
-			tmpSave();
-			selected.move(direction);
-			++moves;
-			tmpSave();
-		}
+		// if (moves <= 0) {
+		// tmpSave();
+		selected.move(direction);
+		++moves;
+		// tmpSave();
+		// }
 
-		else {
-			selected.move(direction);
-			++moves;
-			tmpSave();
-		}
+		/*
+		 * else {
+		 * selected.move(direction);
+		 * ++moves;
+		 * tmpSave();
+		 * }
+		 */
 
 		return true;
 
