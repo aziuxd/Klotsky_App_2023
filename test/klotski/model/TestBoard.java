@@ -61,7 +61,7 @@ public class TestBoard {
 	@Test
 	public void testGetSelectedPiece() {
 		Board testBoard = new Board();
-		testBoard.selectPiece(0, 0);
+		testBoard.selectPiece(1, 2);
 		assertEquals(testBoard.getSelectedPiece(), testBoard.getPieces()[1]);
 		testBoard.selectPiece(0, 4); // deselect
 		assertNull(testBoard.getSelectedPiece());
@@ -94,7 +94,7 @@ public class TestBoard {
 	@Test
 	public void testSelectPiece() {
 		Board testBoard = new Board();
-		testBoard.selectPiece(0, 0);
+		testBoard.selectPiece(1, 2);
 		assertEquals(testBoard.getPieces()[1], testBoard.getSelectedPiece());
 		testBoard.selectPiece(0, 4); // deselect
 		assertNull(testBoard.getSelectedPiece());
@@ -155,13 +155,13 @@ public class TestBoard {
 		
 		testBoard.setConfig(2);
 		testBoard.reset();
-		assertFalse(testBoard.isOccupied(2, 2));
-		assertFalse(testBoard.isOccupied(2, 3));
+		assertFalse(testBoard.isOccupied(0, 2));
+		assertFalse(testBoard.isOccupied(1, 2));
 		
 		testBoard.setConfig(3);
 		testBoard.reset();
-		assertFalse(testBoard.isOccupied(0, 5));
-		assertFalse(testBoard.isOccupied(1, 5));
+		assertFalse(testBoard.isOccupied(2, 4));
+		assertFalse(testBoard.isOccupied(3, 4));
 		
 		testBoard.setConfig(4);
 		testBoard.reset();
@@ -206,14 +206,14 @@ public class TestBoard {
 		Board b = new Board();
 		String testString = "0\n" +
 				"1 0 2 2\n" + 
-				"0 0 1 2\n" + 
-				"3 0 1 2\n" + 
+				"1 2 1 2\n" + 
+				"2 2 1 2\n" + 
 				"0 2 1 2\n" + 
-				"1 2 1 1\n" + 
-				"2 2 1 1\n" + 
+				"0 0 1 1\n" + 
+				"3 0 1 1\n" + 
 				"3 2 1 2\n" + 
-				"1 3 1 1\n" + 
-				"2 3 1 1\n" + 
+				"0 1 1 1\n" + 
+				"3 1 1 1\n" + 
 				"1 4 2 1\n";
 		assertEquals(testString, b.toString());
 	}
