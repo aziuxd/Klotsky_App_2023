@@ -508,6 +508,11 @@ public class KlotskiApp extends JFrame {
 	public void tmpSave() {
 		try {
 			Piece[] pieces = board.getPieces();
+			String nomeCartella = "cache_undo";
+			File cartella = new File(nomeCartella);
+
+			if (!cartella.exists()) // Se la cartella non esiste la crea
+				cartella.mkdir();
 			File file = new File("cache_undo/tmpSave.txt");
 			boolean append = file.exists(); // Controlla se il file esiste
 
