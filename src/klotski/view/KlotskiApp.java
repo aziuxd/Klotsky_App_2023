@@ -42,6 +42,7 @@ import klotski.controller.SaveController;
 import klotski.controller.SelectPieceController;
 import klotski.controller.SetConfigController;
 import klotski.controller.TimerController;
+import klotski.controller.TmpSaveController;
 import klotski.controller.UndoMoveController;
 
 import klotski.model.Piece;
@@ -73,42 +74,6 @@ public class KlotskiApp extends JFrame {
 		return btnReset;
 	}
 
-	public void tmpSave() {
-		try {
-			Piece[] pieces = board.getPieces();
-			String nomeCartella = "cache_undo";
-			File cartella = new File(nomeCartella);
-
-			if (!cartella.exists()) // Se la cartella non esiste la crea
-				cartella.mkdir();
-			File file = new File("cache_undo/tmpSave.txt");
-			boolean append = file.exists(); // Controlla se il file esiste
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
-			// print the current configuration on the tmp file
-
-			writer.write(Integer.toString(board.getMoves()));
-			writer.newLine();
-
-			for (int i = 0; i < 10; i++) {
-				int[] pezzi = pieces[i].getDims();
-				writer.write(Integer.toString(pezzi[0]) + " ");
-
-				writer.write(Integer.toString(pezzi[1]) + " ");
-
-				writer.write(Integer.toString(pezzi[2]) + " ");
-
-				writer.write(Integer.toString(pezzi[3]) + " ");
-				writer.newLine();
-			}
-
-			writer.close();
-			file.deleteOnExit();
-		} catch (IOException e) {
-			System.out.println("Error writing to file");
-		}
-	}
-
 	public void DeleteFilesInFolder() {
 
 		String folderPath = "cache_undo";
@@ -136,7 +101,7 @@ public class KlotskiApp extends JFrame {
 	 */
 	public KlotskiApp(Board b) {
 		this.board = b;
-		tmpSave();
+		new TmpSaveController(b).tmpSave();
 		setTitle("Klotski");
 		setFocusable(true);
 		requestFocus();
@@ -146,6 +111,7 @@ public class KlotskiApp extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		JFileChooser fc = new JFileChooser();
 
 		JMenuBar menuBar = new JMenuBar();
@@ -238,7 +204,8 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(1);
 				timerController.resetTimer();
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
+
 			}
 		});
 
@@ -252,7 +219,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(2);
 				timerController.resetTimer();
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 
@@ -266,7 +233,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(3);
 				timerController.resetTimer();
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 
@@ -280,7 +247,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(4);
 				timerController.resetTimer();
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 
@@ -359,22 +326,22 @@ public class KlotskiApp extends JFrame {
 						if (dx > 0) {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(1);
-							tmpSave();
+							new TmpSaveController(b).tmpSave();
 						} else {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(3);
-							tmpSave();
+							new TmpSaveController(b).tmpSave();
 						}
 					} else {
 						// vertical drag
 						if (dy > 0) {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(2);
-							tmpSave();
+							new TmpSaveController(b).tmpSave();
 						} else {
 							new MovePieceController(KlotskiApp.this, board)
 									.move(0);
-							tmpSave();
+							new TmpSaveController(b).tmpSave();
 						}
 					}
 				}
@@ -398,22 +365,22 @@ public class KlotskiApp extends JFrame {
 						kc == KeyEvent.VK_K) {
 					// up
 					new MovePieceController(KlotskiApp.this, board).move(0);
-					tmpSave();
+					new TmpSaveController(b).tmpSave();
 				} else if (kc == KeyEvent.VK_RIGHT || kc == KeyEvent.VK_D ||
 						kc == KeyEvent.VK_L) {
 					// right
 					new MovePieceController(KlotskiApp.this, board).move(1);
-					tmpSave();
+					new TmpSaveController(b).tmpSave();
 				} else if (kc == KeyEvent.VK_DOWN || kc == KeyEvent.VK_S ||
 						kc == KeyEvent.VK_J) {
 					// down
 					new MovePieceController(KlotskiApp.this, board).move(2);
-					tmpSave();
+					new TmpSaveController(b).tmpSave();
 				} else if (kc == KeyEvent.VK_LEFT || kc == KeyEvent.VK_A ||
 						kc == KeyEvent.VK_H) {
 					// left
 					new MovePieceController(KlotskiApp.this, board).move(3);
-					tmpSave();
+					new TmpSaveController(b).tmpSave();
 				}
 			}
 
@@ -467,7 +434,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(0);
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 		btnUp.setFocusable(false);
@@ -479,7 +446,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(1);
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 		btnRight.setFocusable(false);
@@ -491,7 +458,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(3);
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 		btnLeft.setFocusable(false);
@@ -503,7 +470,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new MovePieceController(KlotskiApp.this, board).move(2);
-				tmpSave();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 		btnDown.setFocusable(false);
