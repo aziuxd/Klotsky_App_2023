@@ -73,6 +73,64 @@ public class KlotskiApp extends JFrame {
 		return btnReset;
 	}
 
+	public void tmpSave() {
+		try {
+			Piece[] pieces = board.getPieces();
+			String nomeCartella = "cache_undo";
+			File cartella = new File(nomeCartella);
+
+			if (!cartella.exists()) // Se la cartella non esiste la crea
+				cartella.mkdir();
+			File file = new File("cache_undo/tmpSave.txt");
+			boolean append = file.exists(); // Controlla se il file esiste
+
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
+			// print the current configuration on the tmp file
+
+			writer.write(Integer.toString(board.getMoves()));
+			writer.newLine();
+
+			for (int i = 0; i < 10; i++) {
+				int[] pezzi = pieces[i].getDims();
+				writer.write(Integer.toString(pezzi[0]) + " ");
+
+				writer.write(Integer.toString(pezzi[1]) + " ");
+
+				writer.write(Integer.toString(pezzi[2]) + " ");
+
+				writer.write(Integer.toString(pezzi[3]) + " ");
+				writer.newLine();
+			}
+
+			writer.close();
+			file.deleteOnExit();
+		} catch (IOException e) {
+			System.out.println("Error writing to file");
+		}
+	}
+
+	public void DeleteFilesInFolder() {
+
+		String folderPath = "cache_undo";
+
+		try {
+			Path directory = Paths.get(folderPath);
+			Files.walk(directory)
+					.filter(Files::isRegularFile)
+					.forEach(file -> {
+						try {
+							Files.delete(file);
+
+						} catch (Exception e) {
+							System.out.println("Error deleting file: " + file);
+						}
+					});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -502,64 +560,6 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		updateThread.start();
-
-	}
-
-	public void tmpSave() {
-		try {
-			Piece[] pieces = board.getPieces();
-			String nomeCartella = "cache_undo";
-			File cartella = new File(nomeCartella);
-
-			if (!cartella.exists()) // Se la cartella non esiste la crea
-				cartella.mkdir();
-			File file = new File("cache_undo/tmpSave.txt");
-			boolean append = file.exists(); // Controlla se il file esiste
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
-			// print the current configuration on the tmp file
-
-			writer.write(Integer.toString(board.getMoves()));
-			writer.newLine();
-
-			for (int i = 0; i < 10; i++) {
-				int[] pezzi = pieces[i].getDims();
-				writer.write(Integer.toString(pezzi[0]) + " ");
-
-				writer.write(Integer.toString(pezzi[1]) + " ");
-
-				writer.write(Integer.toString(pezzi[2]) + " ");
-
-				writer.write(Integer.toString(pezzi[3]) + " ");
-				writer.newLine();
-			}
-
-			writer.close();
-			file.deleteOnExit();
-		} catch (IOException e) {
-			System.out.println("Error writing to file");
-		}
-	}
-
-	public void DeleteFilesInFolder() {
-
-		String folderPath = "cache_undo";
-
-		try {
-			Path directory = Paths.get(folderPath);
-			Files.walk(directory)
-					.filter(Files::isRegularFile)
-					.forEach(file -> {
-						try {
-							Files.delete(file);
-
-						} catch (Exception e) {
-							System.out.println("Error deleting file: " + file);
-						}
-					});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 	}
 }
