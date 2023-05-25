@@ -1,6 +1,5 @@
 package klotski.controller;
 
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class TimerController {

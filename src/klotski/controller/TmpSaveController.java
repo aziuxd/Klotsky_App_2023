@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 
 import klotski.model.Board;
 import klotski.model.Piece;
+//classe che crea il file che vien eletto dall'undocontroller
 
 public class TmpSaveController {
     Board board;
