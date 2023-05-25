@@ -23,16 +23,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.*;
-import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedWriter;
-
 import klotski.model.Board;
 import klotski.controller.AboutController;
+import klotski.controller.DeleteFilesInFolder;
 import klotski.controller.LicenseController;
 import klotski.controller.MovePieceController;
 import klotski.controller.OpenController;
@@ -45,8 +38,6 @@ import klotski.controller.TimerController;
 import klotski.controller.TmpSaveController;
 import klotski.controller.UndoMoveController;
 
-import klotski.model.Piece;
-
 public class KlotskiApp extends JFrame {
 	Board board;
 	PuzzleView puzzleView;
@@ -54,7 +45,7 @@ public class KlotskiApp extends JFrame {
 	JLabel timerCounter;
 	JButton btnReset;
 	Point storedPoint;
-	TimerController timerController = new TimerController();
+	TimerController timerController;
 
 	// Necessary to suppress an Eclipse warning
 	private static final long serialVersionUID = 5052390254637954176L;
@@ -74,28 +65,6 @@ public class KlotskiApp extends JFrame {
 		return btnReset;
 	}
 
-	public void DeleteFilesInFolder() {
-
-		String folderPath = "cache_undo";
-
-		try {
-			Path directory = Paths.get(folderPath);
-			Files.walk(directory)
-					.filter(Files::isRegularFile)
-					.forEach(file -> {
-						try {
-							Files.delete(file);
-
-						} catch (Exception e) {
-							System.out.println("Error deleting file: " + file);
-						}
-					});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -111,6 +80,7 @@ public class KlotskiApp extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		timerController = new TimerController();
 
 		JFileChooser fc = new JFileChooser();
 
@@ -167,7 +137,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
 					KlotskiApp.this.dispose();
-					DeleteFilesInFolder();
+					new DeleteFilesInFolder().DeleteFiles();
 				}
 			}
 		});
@@ -190,6 +160,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
+				new DeleteFilesInFolder().DeleteFiles();
 				timerController.resetTimer();
 			}
 		});
@@ -204,6 +175,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(1);
 				timerController.resetTimer();
+				new DeleteFilesInFolder().DeleteFiles();
 				new TmpSaveController(b).tmpSave();
 
 			}
@@ -219,6 +191,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(2);
 				timerController.resetTimer();
+				new DeleteFilesInFolder().DeleteFiles();
 				new TmpSaveController(b).tmpSave();
 			}
 		});
@@ -233,6 +206,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(3);
 				timerController.resetTimer();
+				new DeleteFilesInFolder().DeleteFiles();
 				new TmpSaveController(b).tmpSave();
 			}
 		});
@@ -247,6 +221,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new SetConfigController(KlotskiApp.this, board).setConfig(4);
 				timerController.resetTimer();
+				new DeleteFilesInFolder().DeleteFiles();
 				new TmpSaveController(b).tmpSave();
 			}
 		});
@@ -293,7 +268,8 @@ public class KlotskiApp extends JFrame {
 			public void windowClosing(WindowEvent we) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
 					KlotskiApp.this.dispose();
-					DeleteFilesInFolder();
+					new DeleteFilesInFolder().DeleteFiles();
+
 				}
 			}
 		});
@@ -406,7 +382,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
 				timerController.resetTimer();
-				DeleteFilesInFolder();
+				new DeleteFilesInFolder().DeleteFiles();
 			}
 		});
 
@@ -419,7 +395,7 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (new QuitController().confirm(KlotskiApp.this)) {
-					DeleteFilesInFolder();
+					new DeleteFilesInFolder().DeleteFiles();
 					KlotskiApp.this.dispose();
 				}
 			}

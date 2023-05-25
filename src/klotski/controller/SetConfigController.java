@@ -17,6 +17,5 @@ public class SetConfigController {
 		b.reset();
 		app.getPuzzleView().refresh();
 		app.getMovesCounter().setText(Integer.toString(b.getMoves()));
-		app.DeleteFilesInFolder();
 	}
 }

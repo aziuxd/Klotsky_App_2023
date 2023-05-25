@@ -1,10 +1,6 @@
 package klotski.model;
 
-import java.io.*;
 import java.util.List;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedWriter;
 
 /**
  * Represents the entire game board, containing several pieces

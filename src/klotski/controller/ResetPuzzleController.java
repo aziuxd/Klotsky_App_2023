@@ -26,7 +26,6 @@ public class ResetPuzzleController {
 		b.reset();
 		app.getMovesCounter().setText(Integer.toString(b.getMoves()));
 		app.getPuzzleView().refresh();
-		app.DeleteFilesInFolder();
 
 	}
 }
