@@ -10,6 +10,13 @@ public class TimerController {
         startTimer();
     }
 
+    public TimerController(int minutes, int seconds) {
+        startTime = System.currentTimeMillis();
+        elapsedTime = (minutes * 60 + seconds) * 1000;
+        updateUI();
+        startTimer();
+    }
+
     private void startTimer() {
         startTime = System.currentTimeMillis();
 
@@ -32,10 +39,17 @@ public class TimerController {
     private void updateUI() {
         SwingUtilities.invokeLater(() -> {
             long seconds = elapsedTime / 1000;
-            long minutes = seconds / 60;
             seconds = seconds % 60;
-            String timeString = String.format("%02d:%02d", minutes, seconds);
+
         });
+    }
+
+    public String getTimeString() {
+        long seconds = elapsedTime / 1000;
+        long minutes = seconds / 60;
+        seconds = seconds % 60;
+        String timeString = String.format("%02d:%02d", minutes, seconds);
+        return timeString;
     }
 
     public long getTime() {

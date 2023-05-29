@@ -106,7 +106,7 @@ public class KlotskiApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (fc.showSaveDialog(KlotskiApp.this) == JFileChooser.APPROVE_OPTION) {
 					String path = fc.getSelectedFile().getAbsolutePath();
-					new SaveController(board, Paths.get(path)).save();
+					new SaveController(board, Paths.get(path), timerController.getTimeString()).save();
 				}
 			}
 		});
