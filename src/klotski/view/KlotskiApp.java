@@ -511,7 +511,8 @@ public class KlotskiApp extends JFrame {
 			while (true) {
 				String currentTime = timerController.getTimeUpdate();
 				timerCounter.setText(currentTime);
-				b.setTime(timerController.getElapsedTime());
+				b.setTime(timerController.getElapsedTime(), currentTime);
+
 				try {
 					Thread.sleep(1000); // Aggiorna l'etichetta ogni secondo
 				} catch (InterruptedException e) {
