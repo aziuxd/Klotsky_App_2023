@@ -25,6 +25,7 @@ public class OpenController {
 		this.p = p;
 	}
 
+
 	/**
 	 * Reads in a saved game state text file and replaces the current board
 	 * with it

@@ -127,8 +127,7 @@ public class KlotskiApp extends JFrame {
 					String path = fc.getSelectedFile().getAbsolutePath();
 					new OpenController(KlotskiApp.this, board, Paths.get(path))
 							.open();
-					// timerController.setTime(new OpenController(KlotskiApp.this, board,
-					// Paths.get(path)).getTime());
+					timerController.setTime(b.time());
 				}
 			}
 		});

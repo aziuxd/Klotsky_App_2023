@@ -11,6 +11,7 @@ import java.util.List;
 public class Board {
 	Piece[] pieces;
 	Piece selected;
+	String time;
 	int height;
 	int width;
 	int moves; // number of moves the player has made
@@ -71,6 +72,8 @@ public class Board {
 		if (lines.size() < 1 || lines.size() > this.width * this.height) {
 			throw new IllegalArgumentException("Illegal list of lines");
 		}
+		this.time = lines.get(0);
+		lines.remove(0);
 		this.moves = Integer.parseInt(lines.get(0).trim());
 		pieces = new Piece[lines.size() - 1];
 		for (i = 1; i < lines.size(); ++i) {
@@ -90,6 +93,15 @@ public class Board {
 	 */
 	public boolean checkWin() {
 		return hasWon;
+	}
+
+	/**
+	 * Time getter
+	 * 
+	 * @return the time of the savefile
+	 */
+	public String time() {
+		return time;
 	}
 
 	/**
