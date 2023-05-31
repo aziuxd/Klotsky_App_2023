@@ -46,7 +46,6 @@ public class KlotskiApp extends JFrame {
 	JButton btnReset;
 	Point storedPoint;
 	TimerController timerController;
-
 	// Necessary to suppress an Eclipse warning
 	private static final long serialVersionUID = 5052390254637954176L;
 
@@ -65,11 +64,16 @@ public class KlotskiApp extends JFrame {
 		return btnReset;
 	}
 
+	public JLabel getTimer() {
+		return timerCounter;
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public KlotskiApp(Board b) {
 		this.board = b;
+		this.timerController = new TimerController(0, 0);
 		new TmpSaveController(b).tmpSave();
 		setTitle("Klotski");
 		setFocusable(true);
@@ -123,6 +127,8 @@ public class KlotskiApp extends JFrame {
 					String path = fc.getSelectedFile().getAbsolutePath();
 					new OpenController(KlotskiApp.this, board, Paths.get(path))
 							.open();
+					// timerController.setTime(new OpenController(KlotskiApp.this, board,
+					// Paths.get(path)).getTime());
 				}
 			}
 		});
