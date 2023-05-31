@@ -3,6 +3,7 @@ package klotski.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+//riccardo fa brutto
 
 public class DeleteFilesInFolder {
 
