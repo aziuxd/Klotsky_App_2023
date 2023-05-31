@@ -60,8 +60,9 @@ public class Board {
 		this.configuration = number;
 	}
 
-	public void setTime(long time) {
+	public void setTime(long time, String timeString) {
 		this.timeLong = time;
+		this.time = timeString;
 	}
 
 	public void setMove(int number) {

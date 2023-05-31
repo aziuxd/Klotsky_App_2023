@@ -48,7 +48,7 @@ public class Score {
 		out = out.concat(Integer.toString(config) + " ")
 				.concat(Integer.toString(moves) + " ")
 				.concat(Integer.toString(score) + " ")
-				.concat(Integer.toString(time));
+				.concat(board.getTime());
 		return out;
 	}
 }
