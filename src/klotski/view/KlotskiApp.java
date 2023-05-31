@@ -37,6 +37,7 @@ import klotski.controller.SetConfigController;
 import klotski.controller.TimerController;
 import klotski.controller.TmpSaveController;
 import klotski.controller.UndoMoveController;
+import klotski.controller.NextBestMove;
 
 public class KlotskiApp extends JFrame {
 	Board board;
@@ -73,7 +74,7 @@ public class KlotskiApp extends JFrame {
 	 */
 	public KlotskiApp(Board b) {
 		this.board = b;
-		this.timerController = new TimerController(0, 0);
+		this.timerController = new TimerController();
 		new TmpSaveController(b).tmpSave();
 		setTitle("Klotski");
 		setFocusable(true);
@@ -84,7 +85,6 @@ public class KlotskiApp extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		timerController = new TimerController();
 
 		JFileChooser fc = new JFileChooser();
 
@@ -127,7 +127,7 @@ public class KlotskiApp extends JFrame {
 					String path = fc.getSelectedFile().getAbsolutePath();
 					new OpenController(KlotskiApp.this, board, Paths.get(path))
 							.open();
-					timerController.setTime(b.time());
+					timerController.setTime(b.getTime());
 				}
 			}
 		});
@@ -472,6 +472,18 @@ public class KlotskiApp extends JFrame {
 		btnUndo.setBounds(475, 500, 60, 25);
 		contentPane.add(btnUndo);
 
+		JButton btnBmove = new JButton("Best Move");
+		btnBmove.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new NextBestMove(KlotskiApp.this, board).Nextmove();
+			}
+		});
+
+		btnBmove.setFocusable(false);
+		btnBmove.setBounds(525, 300, 100, 25);
+		contentPane.add(btnBmove);
+
 		/******************
 		 * \
 		 * GUI Labels *
@@ -490,7 +502,7 @@ public class KlotskiApp extends JFrame {
 		lblTime.setBounds(475, 100, 66, 15);
 		contentPane.add(lblTime);
 
-		timerCounter = new JLabel(timerController.getTimeUpdate());
+		timerCounter = new JLabel();
 		timerCounter.setBounds(550, 100, 66, 15);
 		contentPane.add(timerCounter);
 
@@ -499,7 +511,7 @@ public class KlotskiApp extends JFrame {
 			while (true) {
 				String currentTime = timerController.getTimeUpdate();
 				timerCounter.setText(currentTime);
-
+				b.setTime(timerController.getElapsedTime());
 				try {
 					Thread.sleep(1000); // Aggiorna l'etichetta ogni secondo
 				} catch (InterruptedException e) {
@@ -508,6 +520,5 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		updateThread.start();
-
 	}
 }

@@ -12,6 +12,7 @@ public class Board {
 	Piece[] pieces;
 	Piece selected;
 	String time;
+	long timeLong;
 	int height;
 	int width;
 	int moves; // number of moves the player has made
@@ -32,6 +33,7 @@ public class Board {
 
 		this.height = 5;
 		this.width = 4;
+		this.time = "00:00";
 	}
 
 	/**
@@ -58,6 +60,15 @@ public class Board {
 		this.configuration = number;
 	}
 
+	public void setTime(long time) {
+		this.timeLong = time;
+	}
+
+	public void setMove(int number) {
+		this.moves = number;
+
+	}
+
 	/**
 	 * Reads in a set a lines representing a board state and sets the pieces of
 	 * this board to match it
@@ -67,6 +78,24 @@ public class Board {
 	 * @return true if able to successfully read in from file, false otherwise
 	 */
 	public boolean setPieces(List<String> lines) {
+		int i;
+		String[] tokens;
+		if (lines.size() < 1 || lines.size() > this.width * this.height) {
+			throw new IllegalArgumentException("Illegal list of lines");
+		}
+		this.moves = Integer.parseInt(lines.get(0).trim());
+		pieces = new Piece[lines.size() - 1];
+		for (i = 1; i < lines.size(); ++i) {
+			tokens = lines.get(i).trim().split("\\s+");
+			pieces[i - 1] = new Piece(Integer.parseInt(tokens[0]),
+					Integer.parseInt(tokens[1]),
+					Integer.parseInt(tokens[2]),
+					Integer.parseInt(tokens[3]));
+		}
+		return true;
+	}
+
+	public boolean setPieces2(List<String> lines) {
 		int i;
 		String[] tokens;
 		if (lines.size() < 1 || lines.size() > this.width * this.height) {
@@ -100,7 +129,7 @@ public class Board {
 	 * 
 	 * @return the time of the savefile
 	 */
-	public String time() {
+	public String getTime() {
 		return time;
 	}
 
@@ -149,6 +178,10 @@ public class Board {
 		return pieces;
 	}
 
+	public int getConfig() {
+		return configuration;
+	}
+
 	/**
 	 * selects the piece at the given x and y coordinates
 	 * 
@@ -186,43 +219,6 @@ public class Board {
 
 		return false;
 	}
-
-	// hei questo è un commento mio perchè lo ho fatto io JACOPO
-	// saves the entire board in the instant it is called in a temporary file that
-	// can be loaded if the player wants to undo the move
-	// and olds a register of very move made that get erased once the player close
-	// the application
-	/*
-	 * public void tmpSave() {
-	 * try {
-	 * 
-	 * File file = new File("cache_undo/tmpSave.txt");
-	 * boolean append = file.exists(); // Controlla se il file esiste
-	 * 
-	 * BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
-	 * // print the current configuration on the tmp file
-	 * 
-	 * writer.write(Integer.toString(this.moves));
-	 * writer.newLine();
-	 * for (Piece p : pieces) {
-	 * 
-	 * writer.write(Integer.toString(p.x) + " ");
-	 * 
-	 * writer.write(Integer.toString(p.y) + " ");
-	 * 
-	 * writer.write(Integer.toString(p.w) + " ");
-	 * 
-	 * writer.write(Integer.toString(p.h) + " ");
-	 * writer.newLine();
-	 * }
-	 * 
-	 * writer.close();
-	 * file.deleteOnExit();
-	 * } catch (IOException e) {
-	 * System.out.println("Error writing to file");
-	 * }
-	 * }
-	 */
 
 	/**
 	 * Tries to move the selected piece in the given direction
@@ -385,4 +381,37 @@ public class Board {
 		return out;
 	}
 
+	public boolean confrontoArray(Piece[] array1, Piece[] array2) {
+		if (array1 == array2) {
+			return true;
+		}
+
+		if (array1 == null || array2 == null || array1.length != array2.length) {
+			return false;
+		}
+
+		for (int i = 0; i < array1.length; i++) {
+			if (!array1[i].equals(array2[i])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public boolean equals(Board board) {
+		if (this == board) {
+			return true;
+		}
+
+		if (!(board instanceof Board)) {
+			return false;
+		}
+
+		Board temp = (Board) board;
+		Piece[] pieces1 = this.getPieces();
+		Piece[] pieces2 = temp.getPieces();
+
+		return confrontoArray(pieces1, pieces2);
+	}
 }

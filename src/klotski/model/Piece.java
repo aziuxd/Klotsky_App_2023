@@ -84,4 +84,20 @@ public class Piece {
 				.concat(Integer.toString(h));
 		return out;
 	}
+
+	public boolean equals(Piece one) {
+		if (this == one) {
+			return true;
+		}
+
+		if (!(one instanceof Piece)) {
+			return false;
+		}
+
+		Piece temp = (Piece) one;
+		return this.x == temp.x &&
+				this.y == temp.y &&
+				this.w == temp.w &&
+				this.h == temp.h;
+	}
 }

@@ -25,7 +25,6 @@ public class OpenController {
 		this.p = p;
 	}
 
-
 	/**
 	 * Reads in a saved game state text file and replaces the current board
 	 * with it
@@ -36,7 +35,7 @@ public class OpenController {
 		Charset charset = Charset.forName("UTF-8");
 		try {
 			List<String> lines = Files.readAllLines(p, charset);
-			b.setPieces(lines);
+			b.setPieces2(lines);
 		} catch (Exception e) {
 			System.err.println(e);
 			return false;

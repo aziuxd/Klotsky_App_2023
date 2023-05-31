@@ -77,10 +77,6 @@ public class TimerController {
         return timeString;
     }
 
-    public long getTime() {
-        return elapsedTime;
-    }
-
     public String getTimeUpdate() {
         long seconds = elapsedTime / 1000;
         long minutes = seconds / 60;
