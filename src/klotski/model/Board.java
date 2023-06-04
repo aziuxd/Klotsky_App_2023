@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represents the entire game board, containing several pieces
  * 
- * @author Joseph Petitti
+ * @author Jacopo Da rodda
  *
  */
 public class Board {
@@ -20,7 +20,7 @@ public class Board {
 	boolean hasWon;
 
 	/**
-	 * Basic constructor. Initializes height and width to standard klotski size.
+	 * Basic constructor. Initializes height and width to standard Klotski size.
 	 * Initializes pieces to configuration 1
 	 */
 	public Board() {

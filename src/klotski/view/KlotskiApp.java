@@ -48,6 +48,7 @@ public class KlotskiApp extends JFrame {
 	Point storedPoint;
 	TimerController timerController;
 	// Necessary to suppress an Eclipse warning
+	//@serial
 	private static final long serialVersionUID = 5052390254637954176L;
 
 	private JPanel contentPane;
@@ -67,6 +68,10 @@ public class KlotskiApp extends JFrame {
 
 	public JLabel getTimer() {
 		return timerCounter;
+	}
+
+	public void stopTimer() {
+		timerController.stopTimer();
 	}
 
 	/**

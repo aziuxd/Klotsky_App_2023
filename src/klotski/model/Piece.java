@@ -70,7 +70,6 @@ public class Piece {
 		return new int[] { this.x, this.y, this.w, this.h };
 	}
 
-	// prova verde
 	/**
 	 * Converts this piece to a string, for saving
 	 * 

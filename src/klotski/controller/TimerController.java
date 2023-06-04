@@ -3,6 +3,7 @@ package klotski.controller;
 public class TimerController {
     private long startTime;
     private long elapsedTime;
+    private boolean isRunning;
 
     public long getElapsedTime() {
         return elapsedTime;
@@ -43,7 +44,7 @@ public class TimerController {
         timerThread.start();
     }
 
-    private void startTimer(String timeString) {
+    /*private void startTimer(String timeString) {
         // startTime = System.currentTimeMillis();
 
         String[] timeParts = timeString.split(":");
@@ -67,6 +68,37 @@ public class TimerController {
             }
         });
         timerThread.start();
+    }*/
+    private void startTimer(String timeString) {
+        String[] timeParts = timeString.split(":");
+        if (timeParts.length == 2) {
+            int minutes = Integer.parseInt(timeParts[0].trim());
+            int seconds = Integer.parseInt(timeParts[1].trim());
+            this.elapsedTime = (minutes * 60 + seconds) * 1000;
+        } else {
+            throw new IllegalArgumentException("Invalid time format. Expected format: minutes:seconds");
+        }
+        startTime = System.currentTimeMillis() + elapsedTime;
+        startTimerThread();
+    }
+
+    private void startTimerThread() {
+        isRunning = true;
+        Thread timerThread = new Thread(() -> {
+            while (isRunning) {
+                elapsedTime = System.currentTimeMillis() - startTime;
+
+                try {
+                    Thread.sleep(1000); // Update the value every second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        timerThread.start();
+    }
+    public void stopTimer() {
+        isRunning = false;
     }
 
     public String getTimeString() {

@@ -15,6 +15,7 @@ public class PuzzleView extends JPanel {
 	private static final long serialVersionUID = 3251334679791843551L;
 
 	Board board;
+	KlotskiApp app;
 
 	/** Off-screen image for drawing (and Graphics object) */
 	Image offScreenImage = null;
@@ -125,6 +126,9 @@ public class PuzzleView extends JPanel {
 			offScreenGraphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 45));
 			offScreenGraphics.drawString("Congratulations!", 10, 72);
 			offScreenGraphics.drawString("You win!", 105, 172);
+			//board.stopTimer();
+
+
 		}
 	}
 
