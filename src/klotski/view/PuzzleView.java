@@ -15,7 +15,6 @@ public class PuzzleView extends JPanel {
 	private static final long serialVersionUID = 3251334679791843551L;
 
 	Board board;
-	KlotskiApp app;
 
 	/** Off-screen image for drawing (and Graphics object) */
 	Image offScreenImage = null;

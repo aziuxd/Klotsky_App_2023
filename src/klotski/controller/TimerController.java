@@ -5,10 +5,6 @@ public class TimerController {
     private long elapsedTime;
     private boolean isRunning;
 
-    public long getElapsedTime() {
-        return elapsedTime;
-    }
-
     public TimerController() {
         startTimer("00:00");
     }
@@ -18,6 +14,9 @@ public class TimerController {
         elapsedTime = (minutes * 60 + seconds) * 1000;
         // updateUI();
         startTimer("00:00");
+    }
+    public long getElapsedTime() {
+        return elapsedTime;
     }
 
     public void setTime(String timeString) {
@@ -44,31 +43,6 @@ public class TimerController {
         timerThread.start();
     }
 
-    /*private void startTimer(String timeString) {
-        // startTime = System.currentTimeMillis();
-
-        String[] timeParts = timeString.split(":");
-        if (timeParts.length == 2) {
-            int minutes = Integer.parseInt(timeParts[0].trim());
-            int seconds = Integer.parseInt(timeParts[1].trim());
-            this.elapsedTime = (minutes * 60 + seconds) * 1000;
-        } else {
-            throw new IllegalArgumentException("Invalid time format. Expected format: minutes:seconds");
-        }
-        startTime = System.currentTimeMillis() + elapsedTime;
-        Thread timerThread = new Thread(() -> {
-            while (true) {
-                elapsedTime = System.currentTimeMillis() - startTime;
-
-                try {
-                    Thread.sleep(1000); // Aggiorna il valore ogni secondo
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        timerThread.start();
-    }*/
     private void startTimer(String timeString) {
         String[] timeParts = timeString.split(":");
         if (timeParts.length == 2) {

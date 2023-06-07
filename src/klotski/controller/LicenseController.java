@@ -35,7 +35,7 @@ public class LicenseController {
 			"The above copyright notice and this permission notice shall be\n" +
 			"included in all copies or substantial portions of the Software.\n"+
 			"\n" +
-			"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY\n" +
+			"THE SOFTWARE IS PROVIDED \"AS PORCODIO IS\", WITHOUT WARRANTY OF ANY\n" +
 			"KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE\n" +
 			"WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR\n" +
 			"PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\n" +

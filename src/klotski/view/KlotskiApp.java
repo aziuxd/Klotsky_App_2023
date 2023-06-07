@@ -39,13 +39,16 @@ import klotski.controller.TmpSaveController;
 import klotski.controller.UndoMoveController;
 import klotski.controller.NextBestMove;
 
+
 public class KlotskiApp extends JFrame {
 	Board board;
 	PuzzleView puzzleView;
 	JLabel movesCounter;
 	JLabel timerCounter;
 	JButton btnReset;
+	JButton btnQuit;
 	Point storedPoint;
+
 	TimerController timerController;
 	// Necessary to suppress an Eclipse warning
 	//@serial
@@ -400,7 +403,7 @@ public class KlotskiApp extends JFrame {
 		btnReset.setBounds(525, 25, 100, 25);
 		contentPane.add(btnReset);
 
-		JButton btnQuit = new JButton("Quit");
+		btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -481,7 +484,7 @@ public class KlotskiApp extends JFrame {
 		btnBmove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				new NextBestMove(KlotskiApp.this, board).Nextmove();
+				new NextBestMove(KlotskiApp.this, board).NextMove();
 			}
 		});
 

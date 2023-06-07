@@ -38,7 +38,7 @@ public class NextBestMove {
 		this.b = b;
 	}
 
-	public void Nextmove() {
+	public void NextMove() {
 		int startLine = 1;
 		int inizio_p = 1;
 		Board temp = new Board();
@@ -47,7 +47,7 @@ public class NextBestMove {
 		while (!foundMatch) {
 			try {
 
-				List<String> lines = lettura(file, startLine, inizio_p);
+				List<String> lines = reading(file, startLine, inizio_p);
 				// lista non valida
 				if (lines.isEmpty()) {
 
@@ -56,7 +56,7 @@ public class NextBestMove {
 
 				temp.setPieces(lines);
 				if (b.equals(temp)) {
-					List<String> nuova = lettura(file, startLine + 11, inizio_p);
+					List<String> nuova = reading(file, startLine + 11, inizio_p);
 					// controlla che pezzo sia in posizione giusta e lo muove altrimenti esce
 					if (nuova.isEmpty()) {
 						Piece red = b.getPieces()[0];
@@ -95,7 +95,7 @@ public class NextBestMove {
 	}
 
 	// legge il file e salva un array di pezzi in una lista
-	public static List<String> lettura(String filePath, int startLine, int lineNumber) throws IOException {
+	public static List<String> reading(String filePath, int startLine, int lineNumber) throws IOException {
 		List<String> lines = new ArrayList<>();
 		int linea_curr = startLine;
 

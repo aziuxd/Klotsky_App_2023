@@ -1,5 +1,5 @@
 package klotski;
-
+ 
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
 

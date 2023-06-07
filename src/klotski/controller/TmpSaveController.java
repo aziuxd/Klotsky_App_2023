@@ -12,8 +12,8 @@ import klotski.model.Piece;
 public class TmpSaveController {
     Board board;
     Piece[] pieces;
-    String nomeCartella = "cache_undo";
-    File cartella = new File(nomeCartella);
+    String FolderName = "cache_undo";
+    File folder = new File(FolderName);
 
     public TmpSaveController(Board b) {
         this.board = b;
@@ -23,8 +23,8 @@ public class TmpSaveController {
     public void tmpSave() {
         try {
 
-            if (!cartella.exists()) // Se la cartella non esiste la crea
-                cartella.mkdir();
+            if (!folder.exists()) // Se la cartella non esiste la crea
+                folder.mkdir();
             File file = new File("cache_undo/tmpSave.txt");
             boolean append = file.exists(); // Controlla se il file esiste
 

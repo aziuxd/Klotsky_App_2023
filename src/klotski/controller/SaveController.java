@@ -16,8 +16,9 @@ public class SaveController {
 	/**
 	 * Basic constructor
 	 * 
-	 * @param app the view application
+	 * @param p the path of th file to save to
 	 * @param b   the model board
+	 * @param time  the time of the game
 	 */
 	public SaveController(Board b, Path p, String time) {
 		this.b = b;

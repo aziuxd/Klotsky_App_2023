@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represents the entire game board, containing several pieces
  * 
- * @author Jacopo Da rodda
+ * @author Jacopo Da rodda Enrico De Carli Diego Romaniello Granozio Riccardo
  *
  */
 public class Board {
@@ -178,6 +178,11 @@ public class Board {
 	public Piece[] getPieces() {
 		return pieces;
 	}
+	/**
+	 * pieces getter
+	 *
+	 * @return this board's configuration
+	 */
 
 	public int getConfig() {
 		return configuration;
@@ -382,7 +387,7 @@ public class Board {
 		return out;
 	}
 
-	public boolean confrontoArray(Piece[] array1, Piece[] array2) {
+	public boolean compareArray(Piece[] array1, Piece[] array2) {
 		if (array1 == array2) {
 			return true;
 		}
@@ -413,6 +418,6 @@ public class Board {
 		Piece[] pieces1 = this.getPieces();
 		Piece[] pieces2 = temp.getPieces();
 
-		return confrontoArray(pieces1, pieces2);
+		return compareArray(pieces1, pieces2);
 	}
 }
