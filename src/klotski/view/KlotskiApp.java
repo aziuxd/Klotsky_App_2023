@@ -23,6 +23,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import klotski.model.Board;
 import klotski.controller.AboutController;
 import klotski.controller.DeleteFilesInFolder;
@@ -39,7 +45,6 @@ import klotski.controller.TmpSaveController;
 import klotski.controller.UndoMoveController;
 import klotski.controller.NextBestMove;
 
-
 public class KlotskiApp extends JFrame {
 	Board board;
 	PuzzleView puzzleView;
@@ -51,7 +56,7 @@ public class KlotskiApp extends JFrame {
 
 	TimerController timerController;
 	// Necessary to suppress an Eclipse warning
-	//@serial
+	// @serial
 	private static final long serialVersionUID = 5052390254637954176L;
 
 	private JPanel contentPane;
