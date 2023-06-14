@@ -489,7 +489,9 @@ public class KlotskiApp extends JFrame {
 		btnBmove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
 				new NextBestMove(KlotskiApp.this, board).NextMove();
+				new TmpSaveController(b).tmpSave();
 			}
 		});
 
