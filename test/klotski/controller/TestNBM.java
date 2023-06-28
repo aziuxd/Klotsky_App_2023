@@ -15,10 +15,10 @@ public void TestNextBestMove(){
     b.setConfig(1);
 	NextBestMove testNBM = new NextBestMove(app, b);
 	testNBM.NextMove();
-    Board c =new Board();
+    Board c = new Board();
 	c.setConfig(1);
 
-    assertEquals(false, c.equals(b));
+    assertNotEquals(c, b);
 
 }
 }

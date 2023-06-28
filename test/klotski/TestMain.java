@@ -2,6 +2,8 @@ package klotski;
 
 import org.junit.Test;
 
+import klotski.Main;
+
 public class TestMain {
 
 	@Test
