@@ -2,6 +2,8 @@ package klotski.model;
 
 import java.util.List;
 
+
+
 /**
  * Represents the entire game board, containing several pieces
  * 
@@ -27,6 +29,7 @@ public class Board {
 		this.pieces = new Piece[10];
 		this.configuration = 1;
 
+
 		// initialize all pieces to configuration 1, set moves to 0, set
 		// selectedPiece to null, and set hasWon to false
 		reset();
@@ -35,6 +38,7 @@ public class Board {
 		this.width = 4;
 		this.time = "00:00";
 	}
+
 
 	/**
 	 * Custom constructor that uses a custom array of pieces

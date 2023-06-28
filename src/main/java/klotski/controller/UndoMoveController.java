@@ -12,7 +12,7 @@ import java.io.*;
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
 
-//hei questo è un commento mio perchè lo ho fatto io JACOPO
+//hei questo è un commento mio perchè lo ho fatto io JACOPO pollo fritto
 public class UndoMoveController {
     KlotskiApp app;
     Board b;
