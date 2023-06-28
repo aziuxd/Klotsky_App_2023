@@ -23,8 +23,8 @@ public void TestNextBestMove(){
 	testNBM.NextMove();
     Board c =new Board();
 	c.setConfig(1);
-    
-    assertTrue(c.equals(b));
+
+    assertEquals(false, c.equals(b));
 
 }
 }

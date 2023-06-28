@@ -21,8 +21,11 @@ public class LicenseController {
 	public void show() {        
 		JOptionPane.showMessageDialog(app, 
 			/* Message */
-			"Copyright 2018 Joseph Petitti\n" +
-			"\n" +
+			"Copyright 2018 Joseph Petitti  \n" +
+					"Copyright 2023 Jacopo Da Rodda , Enrico De Carli, Diego Gerardo Romaniello Ferrari, Riccardo Granozio\n"+
+					"the added classes DeleteFilesInFolder, NextBestMove, TimerController, TmpSaveController, UndoMoveController\n" +
+					"and the added methods in the classes KlotskiApp, Board and Piece are licensed under the above license\n" +
+				"\n" +
 			"Permission is hereby granted, free of charge, to any person\n" +
 			"obtaining a copy of this software and associated documentation\n" +
 			"files (the \"Software\"), to deal in the Software without\n" +
@@ -42,8 +45,8 @@ public class LicenseController {
 			"COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n" +
 			"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\n"+
 			"ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE\n" +
-			"USE OR OTHER DEALINGS IN THE SOFTWARE.",
-
+			"USE OR OTHER DEALINGS IN THE SOFTWARE.\n RICCARDO E' UN BEL RAGAZZO"
+			,
 			/* Title */
 			"Klotski Application License",
 

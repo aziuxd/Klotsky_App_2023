@@ -12,16 +12,8 @@ import java.awt.event.KeyListener;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
