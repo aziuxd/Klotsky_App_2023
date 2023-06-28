@@ -60,10 +60,23 @@ public class Board {
 		this.configuration = number;
 	}
 
+	/**
+	 * Set time in two type: long and string
+	 * 
+	 * @param time type long to store time in millisec
+	 * @param timeString type string like mm:ss
+	 */
+
 	public void setTime(long time, String timeString) {
 		this.timeLong = time;
 		this.time = timeString;
 	}
+
+	/**
+	 * Set the number of moves with the input parameter
+	 * 
+	 * @param number input to set moves
+	 */
 
 	public void setMove(int number) {
 		this.moves = number;
@@ -95,6 +108,15 @@ public class Board {
 		}
 		return true;
 	}
+
+	/**
+	 * Reads in a set a lines representing a board state and time, sets the pieces of
+	 * this board to match it and set time of previous match
+	 * 
+	 * @param lines a List of lines with the first being the number of moves,
+	 *              and the rest representing the x, y, w, and h of pieces
+	 * @return true if able to successfully read in from file, false otherwise
+	 */
 
 	public boolean setPieces2(List<String> lines) {
 		int i;
@@ -387,6 +409,14 @@ public class Board {
 		return out;
 	}
 
+	/**
+	 * Comepare a couple of array of pieces and return a boolean value
+	 * 
+	 * @param array1 list of piece
+	 * @param array2 list of piece
+	 * @return true if equals, false otherwise
+	 */
+
 	public boolean compareArray(Piece[] array1, Piece[] array2) {
 		if (array1 == array2) {
 			return true;
@@ -404,6 +434,14 @@ public class Board {
 
 		return true;
 	}
+
+	/**
+	 * Compare a couple of board and return a boolean value about
+	 * the same pieces configuration
+	 * 
+	 * @param board 
+	 * @return true if equals, false otherwise
+	 */
 
 	public boolean equals(Board board) {
 		if (this == board) {
