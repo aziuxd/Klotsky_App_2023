@@ -1,15 +1,13 @@
 package klotski.controller;
 
 import org.junit.Test;
-import java.nio.file.Files;
+
 import java.nio.file.Path;
 
 import java.nio.file.Paths;
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
 import static org.junit.Assert.*;
-
-import org.junit.Test;
 
 public class TestOpenController {
     String pathFile = "C:/Users/decar/Desktop/Klotsky_App_2023-main/TestOpenCotroller";

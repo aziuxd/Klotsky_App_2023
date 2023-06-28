@@ -5,14 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import klotski.model.Board;
-import klotski.model.Piece;
 import klotski.view.KlotskiApp;
-import static org.junit.Assert.*;
 
-import org.junit.Test;
-
-import klotski.model.Board;
-import klotski.view.KlotskiApp;
 public class TestNBM {
 @Test 
 public void TestNextBestMove(){
