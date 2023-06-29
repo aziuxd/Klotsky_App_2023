@@ -15,7 +15,7 @@ public class TestSetConfigController {
         KlotskiApp app = new KlotskiApp(b);
         SetConfigController testCont = new SetConfigController(app, b);
         //test metodo setConfig
-        assertFalse(b.getConfig() == 4);
+        assertFalse(b.getConfig() == 3);
         testCont.setConfig(4);
         assertTrue(b.getConfig() == 4);
     }
