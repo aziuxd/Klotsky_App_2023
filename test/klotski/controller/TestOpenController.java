@@ -55,6 +55,7 @@ public class TestOpenController {
         // Delete the test file
         Files.delete(filePath);
         } catch (Exception e){
+            System.out.println(e.getMessage());
 
         } 
     }
