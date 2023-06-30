@@ -4,7 +4,9 @@ import javax.swing.JOptionPane;
 
 import klotski.view.KlotskiApp;
 
-	
+/**
+ * Controller class responsible for managing the closing of the application.
+ */
 public class QuitController {
 	/**
 	 * Asks the player to confirm quitting the app

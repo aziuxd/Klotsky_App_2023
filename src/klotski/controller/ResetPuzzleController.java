@@ -2,7 +2,9 @@ package klotski.controller;
 
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for the resetting of the board to the initial configuration.
+ */
 public class ResetPuzzleController {
 	final KlotskiApp app;
 	final Board b;

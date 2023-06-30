@@ -3,7 +3,9 @@ package klotski.controller;
 import javax.swing.JOptionPane;
 
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for showing general info about the game.
+ */
 public class AboutController {
 	final KlotskiApp app;
 	

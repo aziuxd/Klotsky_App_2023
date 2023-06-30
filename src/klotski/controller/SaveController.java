@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import klotski.model.Board;
-
+/**
+ * Controller class responsible for creating the savefile.
+ */
 public class SaveController {
 	final Board b;
 	final Path p;

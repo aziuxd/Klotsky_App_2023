@@ -7,7 +7,9 @@ import java.util.List;
 
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for opening  a save file and reloading the game.
+ */
 public class OpenController {
 	KlotskiApp app;
 	Board b;

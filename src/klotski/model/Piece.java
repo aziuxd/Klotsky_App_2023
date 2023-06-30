@@ -1,9 +1,10 @@
 package klotski.model;
 
+
 /**
  * a class that represents a single klotski piece
  * 
- * @author Joseph Petitti
+ * @author Joseph Petitti, Enrico De Carli
  *
  */
 public class Piece {

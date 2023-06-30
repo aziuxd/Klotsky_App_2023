@@ -2,7 +2,9 @@ package klotski.controller;
 
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for the moving piece operation.
+ */
 public class MovePieceController {
 	final KlotskiApp app;
 	final Board b;

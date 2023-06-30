@@ -7,26 +7,33 @@ import java.io.BufferedWriter;
 
 import klotski.model.Board;
 import klotski.model.Piece;
-//classe che crea il file che vien eletto dall'undocontroller
-
+/**
+ * Class responsible for creating the temporary file used by the UndoController.
+ */
 public class TmpSaveController {
     Board board;
     Piece[] pieces;
     String FolderName = "cache_undo";
     File folder = new File(FolderName);
-
+/**
+     * Constructor for the TmpSaveController class.
+     * 
+     * @param b 
+     */
     public TmpSaveController(Board b) {
         this.board = b;
         pieces = board.getPieces();
     }
-
+    /**
+     * Save the current configuration to a temporary file.
+     */
     public void tmpSave() {
         try {
-
-            if (!folder.exists()) // Se la cartella non esiste la crea
+           //create the folder if it doesn't exist 
+            if (!folder.exists()) 
                 folder.mkdir();
             File file = new File("cache_undo/tmpSave.txt");
-            boolean append = file.exists(); // Controlla se il file esiste
+            boolean append = file.exists(); 
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, append));
             // print the current configuration on the tmp file

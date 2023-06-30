@@ -12,18 +12,20 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.ArrayList;
-
+/**
+ * Controller class responsible for managing the next best move operation.
+ */
 public class NextBestMove {
 	final KlotskiApp app;
 	Board b;
 
-	// conf 1
+	// File that contains all the combinations for the first cofiguration
 	String file1 = "NBM_DB/Conf1.txt";
-	// conf 2
+	// File that contains all the combinations for the second cofiguration
 	String file2 = "NBM_DB/Conf2.txt";
-	// conf 3
+	// File that contains all the combinations for the third cofiguration
 	String file3 = "NBM_DB/Conf3.txt";
-	// conf 4
+	// File that contains all the combinations for the fourth cofiguration
 	String file4 = "NBM_DB/Conf4.txt";
 
 	// risoluzione configurazione 1
@@ -37,7 +39,11 @@ public class NextBestMove {
 		this.app = app;
 		this.b = b;
 	}
-
+    /*A method that executes the next best move. 
+	This method checks the current configuration of the Board and searches for matches within the specified configuration files,
+	once a match is found, it executes the corresponding move.
+	
+	*/
 	public void NextMove() {
 		int startLine = 1;
 		int inizio_p = 1;
@@ -48,18 +54,19 @@ public class NextBestMove {
 			try {
 
 				List<String> lines = reading(file, startLine, inizio_p);
-				// lista non valida
+				
 				if (lines.isEmpty()) {
-
+                 //if we get  there is no configuration in the Database 
 					break;
 				}
 
 				temp.setPieces(lines);
 				if (b.equals(temp)) {
 					List<String> nuova = reading(file, startLine + 11, inizio_p);
-					// controlla che pezzo sia in posizione giusta e lo muove altrimenti esce
+					//Checks if the red piece is in the  victory position 
 					if (nuova.isEmpty()) {
 						Piece red = b.getPieces()[0];
+						//if we get there the red piece is in the victory position and move the piece down 
 						if (red.getDims()[0] == 1 && red.getDims()[1] == 3) {
 							b.selectPiece(red.getDims()[0], red.getDims()[1]);
 							new MovePieceController(app, b).move(2);
@@ -67,20 +74,20 @@ public class NextBestMove {
 							break;
 
 						}
-						// configurazione non trovata
+						// if we get here the red piece isn't in the victory position 
 						else {
 							break;
 						}
 
 					}
-
+                    // the board configuration is found so we do the next move
 					b.setPieces(nuova);
 					app.getMovesCounter().setText(Integer.toString(b.getMoves()));
 					app.getPuzzleView().refresh();
-
-					foundMatch = true;
+                    
+		             foundMatch = true;
 				} else {
-
+                   
 					startLine += 11;
 
 				}
@@ -93,14 +100,21 @@ public class NextBestMove {
 
 	}
 
-	// legge il file e salva un array di pezzi in una lista
+	/**
+	 * Static function that read a file from a starting line to a ending line 
+	 * 
+	 * @param filePath a string that represent the path of the file to be read 
+	 * @param startLine an integer that indicates the starting line from wich to star reading the file 
+	 * @param lineNumber an integer that indicates the number of lines that the function has to read 
+	 * @return a list of string that contains the information of the lines that have been read 
+	 */
 	public static List<String> reading(String filePath, int startLine, int lineNumber) throws IOException {
 		List<String> lines = new ArrayList<>();
 		int linea_curr = startLine;
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 			String line;
-			// funziona fino ad un certo punto
+			
 			while (lineNumber < startLine && reader.readLine() != null) {
 				lineNumber++;
 			}
@@ -118,7 +132,11 @@ public class NextBestMove {
 		return lines;
 	}
 
-	// funzione che sceglie il filepath in base alla configurazione della board
+	/**
+	 * function that return the string of the filepath of the corresponding configuration 
+	 * @param i an integer that represents the possible configuration 
+	 * @return a string that represent the path of a file 
+	 */
 	public String configuration(int i) {
 		String file = "";
 		if (i == 1) {

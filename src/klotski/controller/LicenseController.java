@@ -3,7 +3,9 @@ package klotski.controller;
 import javax.swing.JOptionPane;
 
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for showing the Licence.
+ */
 public class LicenseController {
 	final KlotskiApp app;
 	

@@ -12,23 +12,31 @@ import java.io.*;
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
 
-//hei questo è un commento mio perchè lo ho fatto io JACOPO pollo fritto
+/**
+ * Controller class responsible for undoing the last move in the game.
+ */
 public class UndoMoveController {
     KlotskiApp app;
     Board b;
     String s = "cache_undo/tmpSave.txt";
     final Path p = Path.of(s);
-
+    /**
+     * Constructor for the UndoMoveController class.
+     * 
+     * @param app 
+     * @param b  
+     */
     public UndoMoveController(KlotskiApp app, Board b) {
         this.app = app;
         this.b = b;
 
     }
 
-    // function that pulls the last move made from the file and then undoes it
-    // the file format is the same as the save file format but it as all the moves
-    // of the
-    // game in order from first to last move made in the game
+    /*  function that pulls the last move made from the file and then undoes it
+     * the file format is the same as the save file format but it as all the moves
+     * of the
+     * game in order from first to last move made in the game
+     */
     public void undoMove() {
         String filePath = s; // Path of the file
         try {
@@ -37,14 +45,14 @@ public class UndoMoveController {
 
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
-            // Leggi tutte le righe e memorizzale nella lista
+            // Read all the lines and store them in the list
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
             reader.close();
 
-            // Verifica se ci sono abbastanza righe da rimuovere
+            // Check if there are enough lines to remove
             if (lines.size() > 11)
                 RemoveLastLinesFromFile();
         } catch (IOException e) {
@@ -53,12 +61,12 @@ public class UndoMoveController {
 
         Charset charset = Charset.forName("UTF-8");
         try {
-            // Leggi le ultime 11 righe dal file
+            // Read the last 11 lines from the file
             List<String> lines = Files.lines(p, charset)
                     .skip(Math.max(0, Files.lines(p, charset).count() - 11))
                     .collect(Collectors.toList());
 
-            // Aggiorna le configurazioni delle piece nel board
+            // Update the configurations of the pieces in the board
             b.setPieces(lines);
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,7 +75,9 @@ public class UndoMoveController {
         app.getPuzzleView().refresh();
         app.getMovesCounter().setText(Integer.toString(b.getMoves()));
     }
-
+    /**
+     * Remove the last lines from the file.
+     */
     public void RemoveLastLinesFromFile() {
 
         String filePath = s; // Path of the file
@@ -77,21 +87,21 @@ public class UndoMoveController {
 
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
-            // Leggi tutte le righe e memorizzale nella lista
+            // Read all the lines and store them in the list
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
             reader.close();
 
-            // Verifica se ci sono abbastanza righe da rimuovere
+            // Check if there are enough lines to remove
             if (lines.size() >= 11) {
-                // Rimuovi le ultime 11 righe
+                 // Remove the last 11 lines
                 int startIndex = lines.size() - 11;
                 int endIndex = lines.size();
                 lines.subList(startIndex, endIndex).clear();
 
-                // Sovrascrivi il file con il nuovo contenuto
+                // Overwrite the file with the updated content
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                 for (String updatedLine : lines) {
                     writer.write(updatedLine);

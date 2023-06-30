@@ -4,7 +4,9 @@ import java.awt.event.MouseEvent;
 
 import klotski.model.Board;
 import klotski.view.KlotskiApp;
-
+/**
+ * Controller class responsible for piece selection.
+ */
 public class SelectPieceController {
 	final KlotskiApp app;
 	final Board b;
