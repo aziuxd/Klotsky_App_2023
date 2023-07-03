@@ -455,7 +455,7 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		btnDown.setFocusable(false);
-		btnDown.setBounds(525, 250, 50, 25);
+		btnDown.setBounds(525, 250, 100, 25);
 		contentPane.add(btnDown);
 		// hei questo è un commento mio perchè lo ho fatto io JACOPO
 		JButton btnUndo = new JButton("Undo");
@@ -469,7 +469,7 @@ public class KlotskiApp extends JFrame {
 		});
 
 		btnUndo.setFocusable(false);
-		btnUndo.setBounds(475, 500, 60, 25);
+		btnUndo.setBounds(425, 500, 100, 25);
 		contentPane.add(btnUndo);
 
 		JButton btnBmove = new JButton("Best Move");
