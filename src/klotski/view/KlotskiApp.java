@@ -455,7 +455,7 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		btnDown.setFocusable(false);
-		btnDown.setBounds(525, 250, 100, 25);
+		btnDown.setBounds(525, 250, 50, 25);
 		contentPane.add(btnDown);
 		// hei questo è un commento mio perchè lo ho fatto io JACOPO
 		JButton btnUndo = new JButton("Undo");
