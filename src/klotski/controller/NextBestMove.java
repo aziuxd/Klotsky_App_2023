@@ -25,6 +25,7 @@ public class NextBestMove {
 	String file2 = "NBM_DB/Conf2.txt";
 	// File that contains all the combinations for the third cofiguration
 	String file3 = "NBM_DB/Conf3.txt";
+
 	// File that contains all the combinations for the fourth cofiguration
 	String file4 = "NBM_DB/Conf4.txt";
 
@@ -126,7 +127,7 @@ public class NextBestMove {
 				linea_curr++;
 
 			}
-			reader.close();
+
 		}
 
 		return lines;
